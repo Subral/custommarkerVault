@@ -61,17 +61,18 @@ window.onload = function () {
 
     const markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
         type: 'pattern',
-        patternUrl: 'https://rawcdn.githack.com/AR-js-org/AR.js/master/data/data/patt.hiro',
+        patternUrl: 'pattern-marker.patt',
     });
 
     const loader = new GLTFLoader();
 
     loader.load(
-        'bank-vault/source/Bankvault.glb',
+        'Bankvault.glb',
         function (gltf) {
             const model = gltf.scene;
             model.scale.set(1, 1, 1);
             model.position.set(0, 0, 0);
+            model.rotation.set(0,0,0);
             markerRoot.add(model);
             model.visible = false;
         },
@@ -89,6 +90,7 @@ window.onload = function () {
             const model1 = gltf.scene;
             model1.scale.set(14, 14, 14);
             model1.position.set(-2, 3.8, 3);
+            model1.rotation.set(0,0,0);
             markerRoot.add(model1);
             model1.visible = false;
         },
@@ -113,6 +115,18 @@ window.onload = function () {
         if (arToolkitSource.ready !== false) {
             arToolkitContext.update(arToolkitSource.domElement);
         }
+
+
+
+        if (clickActivated) {
+            markerRoot.children.forEach(child => {
+                if (child.visible) {
+                    child.position.z -= 0.02; // Move model towards the user along the z-axis
+                }
+            });
+        }
+
+        
 
         if (!clickActivated) {
             markerRoot.children.forEach(child => {
