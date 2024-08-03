@@ -117,15 +117,13 @@ window.onload = function () {
         }
 
 
-
-        if (clickActivated) {
-            markerRoot.children.forEach(child => {
-                if (child.visible) {
-                    child.position.z -= 0.02; // Move model towards the user along the z-axis
-                }
-            });
-        }
-
+        // if (clickActivated) {
+        //     markerRoot.children.forEach(child => {
+        //         if (child.visible) {
+        //             child.position.z -= 0.02; // Move model towards the user along the z-axis
+        //         }
+        //     });
+        // }
         
 
         if (!clickActivated) {
